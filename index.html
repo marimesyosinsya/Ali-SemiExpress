@@ -5,160 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AliSemiExpress | 信頼と激安の通販サイト</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Helvetica Neue', sans-serif; background: #f5f5f5; color: #333; }
 
-    body {
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-    }
+    header, nav, footer { padding: 15px 20px; }
+    header { background: #d62828; color: white; display: flex; justify-content: space-between; align-items: center; }
+    .search-box input { padding: 8px 12px; border-radius: 5px; border: none; width: 250px; }
 
-    header {
-      background-color: #d62828;
-      padding: 15px 20px;
-      color: white;
-    }
+    nav { background: white; border-bottom: 1px solid #ccc; }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav ul li a { text-decoration: none; color: #d62828; font-weight: bold; }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .hero { background: #ffeaea; text-align: center; padding: 40px 0; font-size: 2rem; font-weight: bold; }
 
-    .topbar h1 {
-      font-size: 1.6rem;
-      font-weight: bold;
-    }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 20px; }
+    .section-title { font-size: 1.5rem; margin-bottom: 20px; border-left: 6px solid #d62828; padding-left: 10px; }
 
-    .search-box input {
-      padding: 8px 12px;
-      border: none;
-      border-radius: 5px;
-      width: 250px;
-    }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
 
-    nav {
-      background-color: #fff;
-      padding: 10px 20px;
-      border-bottom: 1px solid #ccc;
-    }
+    .product { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; cursor: pointer; transition: 0.2s; }
+    .product:hover { transform: translateY(-5px); }
+    .product img { width: 100%; height: 200px; object-fit: cover; }
+    .product-content { padding: 15px; }
+    .product h3 { font-size: 1rem; margin-bottom: 5px; }
+    .product .price { color: #d62828; font-weight: bold; margin-bottom: 10px; }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-    }
+    footer { background: #222; color: #bbb; text-align: center; font-size: 0.9rem; margin-top: 40px; padding: 20px; }
 
-    nav ul li a {
-      text-decoration: none;
-      color: #d62828;
-      font-weight: bold;
-    }
-
-    .hero {
-      background: url('https://via.placeholder.com/1200x300/fff2f2/aa0000?text=最大90%OFFセール開催中') center/cover;
-      height: 250px;
-      display: flex;
+    /* モーダル */
+    .modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
       justify-content: center;
       align-items: center;
-      font-size: 2rem;
-      color: #aa0000;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+      z-index: 1000;
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .section-title {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-      color: #222;
-      border-left: 6px solid #d62828;
-      padding-left: 10px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .product {
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-    }
-
-    .product img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .product-content {
-      padding: 15px;
-    }
-
-    .product h3 {
-      font-size: 1rem;
-      margin-bottom: 5px;
-      color: #222;
-    }
-
-    .product .price {
-      color: #d62828;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .product button {
-      padding: 8px 12px;
-      background-color: #d62828;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    footer {
-      background-color: #222;
-      color: #bbb;
-      text-align: center;
+    .modal-content {
+      background: white;
       padding: 20px;
-      margin-top: 40px;
-      font-size: 0.9rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .modal-content h2 { margin-bottom: 10px; }
+    .modal-content p { margin-bottom: 20px; }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #d62828;
     }
 
     @media (max-width: 600px) {
-      .search-box input {
-        width: 100%;
-      }
+      .search-box input { width: 100%; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="topbar">
-      <h1>AliSemiExpress</h1>
-      <div class="search-box">
-        <input type="text" placeholder="商品を検索">
-      </div>
+    <h1>AliSemiExpress</h1>
+    <div class="search-box">
+      <input type="text" placeholder="商品を検索">
     </div>
   </header>
 
@@ -172,43 +89,71 @@
     </ul>
   </nav>
 
-  <section class="hero">
-    春の爆売れセール開催中！
-  </section>
+  <section class="hero">最大90%OFF！春のセール実施中！</section>
 
   <div class="container">
     <h2 class="section-title">おすすめ商品</h2>
     <div class="product-grid">
-      <div class="product">
+
+      <div class="product" onclick="openModal('ワイヤレスヘッドフォン', '高音質で長時間再生が可能なBluetooth対応ヘッドフォン。通勤通学に最適！', '¥2,480')">
         <img src="https://via.placeholder.com/300x200?text=商品1" alt="商品1">
         <div class="product-content">
           <h3>ワイヤレスヘッドフォン</h3>
           <p class="price">¥2,480</p>
-          <button>カートに追加</button>
         </div>
       </div>
-      <div class="product">
+
+      <div class="product" onclick="openModal('スマートホームカメラ', '遠隔で映像確認可能。夜間モード・動体検知機能付きのWi-Fiカメラです。', '¥3,990')">
         <img src="https://via.placeholder.com/300x200?text=商品2" alt="商品2">
         <div class="product-content">
           <h3>スマートホームカメラ</h3>
           <p class="price">¥3,990</p>
-          <button>カートに追加</button>
         </div>
       </div>
-      <div class="product">
+
+      <div class="product" onclick="openModal('USB-C 急速充電器', 'スマホ・タブレット対応の高速充電器。コンパクトで持ち運び便利！', '¥980')">
         <img src="https://via.placeholder.com/300x200?text=商品3" alt="商品3">
         <div class="product-content">
           <h3>USB-C 急速充電器</h3>
           <p class="price">¥980</p>
-          <button>カートに追加</button>
         </div>
       </div>
+
     </div>
   </div>
 
   <footer>
     &copy; 2025 AliSemiExpress — 本サイトはジョークを含んだ非公式パロディです。
   </footer>
+
+  <!-- モーダル -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✖</button>
+      <h2 id="modalTitle">商品名</h2>
+      <p id="modalDesc">商品説明が入ります。</p>
+      <p id="modalPrice" style="font-weight:bold; color:#d62828;">¥0</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(title, description, price) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDesc').textContent = description;
+      document.getElementById('modalPrice').textContent = price;
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    // モーダル外クリックで閉じる
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('productModal');
+      if (e.target === modal) closeModal();
+    });
+  </script>
 
 </body>
 </html>
