@@ -87,7 +87,7 @@
   <header>
     <h1>AliSemiExpress</h1>
     <div class="search-box">
-      <input type="text" placeholder="商品を検索">
+      <input type="text" id="searchInput" placeholder="商品名を検索" oninput="filterProducts()" style="padding: 8px 12px; border-radius: 5px; border: none; width: 250px;" />
     </div>
   </header>
 
@@ -110,7 +110,9 @@
       <div class="product" onclick="openModal('TheSound SuperEarphone100', '高音質で長時間(1回の満充電で最大10時間)の再生が可能なBluetooth対応イヤホン。通勤通学に最適！', '¥1,950')">
         <img src="32150740_m.jpg" alt="商品1">
         <div class="product-content">
-          <h3>ワイヤレスヘッドフォン レビュー:約3.3 4件のレビュー</h3>
+          <h3>TheSound SuperEarphone100
+          <br>
+          レビュー:約3.3|4件のレビュー</h3>
           <p class="price">¥2,480</p>
         </div>
       </div>
@@ -197,6 +199,16 @@
       const modal = document.getElementById('productModal');
       if (e.target === modal) closeModal();
     });
+    function filterProducts() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const products = document.querySelectorAll(".product");
+
+  products.forEach(product => {
+    const title = product.querySelector("h3").textContent.toLowerCase();
+    product.style.display = title.includes(input) ? "block" : "none";
+  });
+}
+
   </script>
 
 </body>
